@@ -86,13 +86,13 @@ public extension BBAlert {
     var titleFont: UIFont? {
         set {
             guard let font = newValue else { return }
-            let attributedMessage = NSAttributedString(string: message ?? "", attributes: [.font: font])
-            setValue(attributedMessage, forKey: "attributedTitle")
+            let attributedTitle = NSAttributedString(string: title ?? "", attributes: [.font: font])
+            setValue(attributedTitle, forKey: "attributedTitle")
         }
         get {
-            let attributedMessage = value(forKey: "attributedTitle") as? NSAttributedString
+            let attributedTitle = value(forKey: "attributedTitle") as? NSAttributedString
             var font: UIFont?
-            for (key, value) in attributedMessage?.attributes(at: 0, effectiveRange: nil) ?? [:] {
+            for (key, value) in attributedTitle?.attributes(at: 0, effectiveRange: nil) ?? [:] {
                 if key == .font, let value = value as? UIFont {
                     font = value
                 }
