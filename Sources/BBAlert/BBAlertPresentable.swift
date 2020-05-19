@@ -17,7 +17,7 @@ extension UIViewController: BBAlertPresentable { }
 
 extension BBAlertPresentable {
 
-    public func present(_ viewControllerToPresent: UIViewController, completion: (() -> Void)?) {
+    public func present(_ viewControllerToPresent: UIViewController, completion: (() -> Void)? = nil) {
         present(viewControllerToPresent, animated: true, completion: completion)
     }
 }
