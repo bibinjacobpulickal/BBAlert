@@ -16,6 +16,7 @@ class ViewController: UITableViewController {
 
     var selectedBackgroundColorIndex = 0
     var selectedTextColorIndex       = 0
+    var selectedButtonTextColorIndex = 0
 
     override func loadView() {
         super.loadView()
@@ -31,6 +32,23 @@ class ViewController: UITableViewController {
         navigationItem.title                                   = "BBAlert"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem                      = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(presentAlert))
+    }
+
+    @objc private func presentAlert() {
+        let actions: [String: UIAlertAction.Style] = [selectedActionText: .default, "Cancel": .cancel, "Destroy": .destructive]
+        presentBBAlert(title: selectedTitleText, message: selectedMessageText, actions: actions, setup: { alert in
+            alert.titleFont       = .boldSystemFont(ofSize: 20)
+            alert.messageFont     = .systemFont(ofSize: 16)
+            alert.backgroundColor = Color.allCases[self.selectedBackgroundColorIndex].color
+            alert.textColor       = Color.allCases[self.selectedTextColorIndex].color
+            alert.buttonTextColor = Color.allCases[self.selectedButtonTextColorIndex].color ?? .white
+        }, actionHandler: { action in
+            if action.title == self.selectedActionText {
+                print("Selected \(self.selectedActionText)")
+            }
+        }) { _ in
+            print("Perform stuff after completion.")
+        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int { Section.allCases.count }
@@ -67,6 +85,9 @@ class ViewController: UITableViewController {
         }
         return cell
     }
+}
+
+extension ViewController: TextFieldCellDelegate {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = Section.allCases[indexPath.section]
@@ -74,28 +95,11 @@ class ViewController: UITableViewController {
             selectedBackgroundColorIndex = indexPath.row
         } else if section == .textColor {
             selectedTextColorIndex = indexPath.row
+        } else if section == .buttonTextColor {
+            selectedButtonTextColorIndex = indexPath.row
         }
         tableView.reloadData()
     }
-
-    @objc private func presentAlert() {
-        let actions: [String: UIAlertAction.Style] = [selectedActionText: .default, "Cancel": .cancel]
-        presentBBAlert(title: selectedTitleText, message: selectedMessageText, actions: actions, setup: { alert in
-            alert.titleFont       = .boldSystemFont(ofSize: 20)
-            alert.messageFont     = .systemFont(ofSize: 16)
-            alert.backgroundColor = Color.allCases[self.selectedBackgroundColorIndex].color
-            alert.textColor       = Color.allCases[self.selectedTextColorIndex].color
-        }, actionHandler: { action in
-            if action.title == self.selectedActionText {
-                print("Selected \(self.selectedActionText)")
-            }
-        }) { _ in
-            print("Perform stuff after completion.")
-        }
-    }
-}
-
-extension ViewController: TextFieldCellDelegate {
 
     func textFieldCell(_ textFieldCell: TextFieldCell, updatedText text: String?) {
         if textFieldCell.section == .title {

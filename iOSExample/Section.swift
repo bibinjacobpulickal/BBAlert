@@ -8,13 +8,13 @@
 import Foundation
 
 enum Section: String, CaseIterable {
-    case title, message, action, backgroundColor, textColor
+    case title, message, action, backgroundColor, textColor, buttonTextColor
 
     var rowCount: Int {
         switch self {
         case .title, .message, .action:
             return 1
-        case .backgroundColor, .textColor:
+        case .backgroundColor, .textColor, .buttonTextColor:
             return Color.allCases.count
         }
     }
