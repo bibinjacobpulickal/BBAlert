@@ -83,6 +83,15 @@ public extension BBAlert {
         }
     }
 
+    var buttonTextColor: UIColor {
+        set {
+            view.tintColor = newValue
+        }
+        get {
+            view.tintColor
+        }
+    }
+
     var titleFont: UIFont? {
         set {
             guard let font = newValue else { return }
