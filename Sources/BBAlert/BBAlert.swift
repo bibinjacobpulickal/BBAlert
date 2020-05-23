@@ -29,7 +29,7 @@ public extension BBAlert {
 
         if !duration.isZero {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                dismiss(completion: completion)
+                self.dismiss(completion: completion)
             }
         }
     }
