@@ -24,6 +24,15 @@ public extension BBAlert {
             }
         }
     }
+
+    func dismiss(after duration: Double, completion: (() -> Void)? = nil) -> Void {
+
+        if !duration.isZero {
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                dismiss(completion: completion)
+            }
+        }
+    }
 }
 
 public extension BBAlert {
