@@ -41,7 +41,7 @@ class ViewController: UITableViewController {
             alert.messageFont     = .systemFont(ofSize: 16)
             alert.backgroundColor = Color.allCases[self.selectedBackgroundColorIndex].color
             alert.textColor       = Color.allCases[self.selectedTextColorIndex].color
-            alert.buttonTextColor = Color.allCases[self.selectedButtonTextColorIndex].color ?? .white
+            alert.buttonTextColor = Color.allCases[self.selectedButtonTextColorIndex].color ?? self.view.tintColor
         }, actionHandler: { action in
             if action.title == self.selectedActionText {
                 print("Selected \(self.selectedActionText)")
@@ -79,9 +79,11 @@ class ViewController: UITableViewController {
         cell.selectionStyle = .none
         let section = Section.allCases[indexPath.section]
         if section == .backgroundColor {
-            cell.accessoryType   = indexPath.row == selectedBackgroundColorIndex ? .checkmark : .none
+            cell.accessoryType = indexPath.row == selectedBackgroundColorIndex ? .checkmark : .none
         } else if section == .textColor {
-            cell.accessoryType   = indexPath.row == selectedTextColorIndex ? .checkmark : .none
+            cell.accessoryType = indexPath.row == selectedTextColorIndex ? .checkmark : .none
+        } else if section == .buttonTextColor {
+            cell.accessoryType = indexPath.row == selectedButtonTextColorIndex ? .checkmark : .none
         }
         return cell
     }
