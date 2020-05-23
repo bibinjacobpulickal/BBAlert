@@ -22,4 +22,8 @@ enum Color: String, CaseIterable {
         case .random: return .random
         }
     }
+
+    static var allNonEmptyCases: [Color] {
+        allCases.filter { $0.color != nil }
+    }
 }
