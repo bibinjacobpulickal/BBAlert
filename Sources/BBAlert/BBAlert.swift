@@ -11,8 +11,12 @@ public typealias BBAlert = UIAlertController
 
 public extension BBAlert {
 
-    convenience init(title: String = "", message: String = "") {
-        self.init(title: title, message: message, preferredStyle: .alert)
+    convenience init(title: String?                 = nil,
+                     message: String?               = nil,
+                     style: UIAlertController.Style = .alert) {
+        self.init(title: title,
+                  message: message,
+                  preferredStyle: style)
 
         pruneNegativeWidthConstraints()
     }
@@ -25,7 +29,8 @@ public extension BBAlert {
         }
     }
 
-    func dismiss(after duration: Double, completion: (() -> Void)? = nil) -> Void {
+    func dismiss(after duration: Double,
+                 completion: (() -> Void)? = nil) -> Void {
 
         if !duration.isZero {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
