@@ -18,7 +18,7 @@ extension UIViewController: BBAlertDismissible { }
 
 extension BBAlertDismissible {
 
-    public func dismiss(completion: (() -> Void)?) {
+    public func dismiss(completion: (() -> Void)? = nil) {
         dismiss(animated: true, completion: completion)
     }
 }
