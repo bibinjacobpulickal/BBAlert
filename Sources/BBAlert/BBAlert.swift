@@ -8,6 +8,7 @@
 import UIKit
 
 public typealias BBAlert = UIAlertController
+public typealias BBAlertConvertible = BBAlertPresentable & BBAlertDismissible
 
 public extension BBAlert {
 
