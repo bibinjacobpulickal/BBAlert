@@ -35,7 +35,7 @@ class ViewController: UITableViewController {
     }
 
     @objc private func presentAlert() {
-        let actions: [String: UIAlertAction.Style] = [selectedActionText: .default, "Cancel": .cancel, "Destroy": .destructive]
+        let actions: [(String, UIAlertAction.Style)] = [(selectedActionText, .default), ("Cancel", .cancel), ("Destroy", .destructive)]
         presentBBAlert(title: selectedTitleText, message: selectedMessageText, actions: actions, setup: { alert in
             alert.titleFont       = .boldSystemFont(ofSize: 20)
             alert.messageFont     = .systemFont(ofSize: 16)
