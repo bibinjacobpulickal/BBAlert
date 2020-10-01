@@ -28,13 +28,14 @@ extension BBAlertPresentable {
 
 extension BBAlertPresentable {
 
-    public func presentBBAlert(title: String?                             = nil,
-                               message: String?                           = nil,
-                               style: BBAlert.Style                       = .alert,
-                               actions: [String: UIAlertAction.Style]     = [:],
-                               setup: ((BBAlert) -> Void)?                = nil,
-                               actionHandler: ((UIAlertAction) -> Void)?  = nil,
-                               completion: ((BBAlert) -> Void)?           = nil) {
+    public func presentBBAlert(
+        title: String?                            = nil,
+        message: String?                          = nil,
+        style: BBAlert.Style                      = .alert,
+        actions: [(String, UIAlertAction.Style)]  = [],
+        setup: ((BBAlert) -> Void)?               = nil,
+        actionHandler: ((UIAlertAction) -> Void)? = nil,
+        completion: ((BBAlert) -> Void)?          = nil) {
 
         let alert = BBAlert(title: title, message: message, style: style)
 
@@ -46,5 +47,23 @@ extension BBAlertPresentable {
         present(alert) {
             completion?(alert)
         }
+    }
+
+    public func presentBBAlert(
+        title: String?                            = nil,
+        message: String?                          = nil,
+        style: BBAlert.Style                      = .alert,
+        actions: [String: UIAlertAction.Style]    = [:],
+        setup: ((BBAlert) -> Void)?               = nil,
+        actionHandler: ((UIAlertAction) -> Void)? = nil,
+        completion: ((BBAlert) -> Void)?          = nil) {
+        presentBBAlert(
+            title: title,
+            message: message,
+            style: style,
+            actions: actions.reduce(into: []) { $0.append(($1.key, $1.value)) },
+            setup: setup,
+            actionHandler: actionHandler,
+            completion: completion)
     }
 }
