@@ -29,10 +29,10 @@ extension BBAlertPresentable {
 extension BBAlertPresentable {
 
     public func presentBBAlert(
-        title: String?                            = nil,
-        message: String?                          = nil,
+        title: String?,
+        message: String?,
         style: BBAlert.Style                      = .alert,
-        actions: [(String, UIAlertAction.Style)]  = [],
+        actions: [(String, UIAlertAction.Style)],
         setup: ((BBAlert) -> Void)?               = nil,
         actionHandler: ((UIAlertAction) -> Void)? = nil,
         completion: ((BBAlert) -> Void)?          = nil) {
@@ -50,10 +50,10 @@ extension BBAlertPresentable {
     }
 
     public func presentBBAlert(
-        title: String?                            = nil,
-        message: String?                          = nil,
+        title: String?,
+        message: String?,
         style: BBAlert.Style                      = .alert,
-        actions: [String: UIAlertAction.Style]    = [:],
+        actions: [String: UIAlertAction.Style],
         setup: ((BBAlert) -> Void)?               = nil,
         actionHandler: ((UIAlertAction) -> Void)? = nil,
         completion: ((BBAlert) -> Void)?          = nil) {
